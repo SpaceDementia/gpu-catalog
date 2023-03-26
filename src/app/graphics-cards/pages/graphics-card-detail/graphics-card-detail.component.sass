@@ -1,0 +1,71 @@
+
+.graphics-card-container
+  border: 1px solid gold
+  padding: 20px
+  margin: 10px
+
+.column-img
+  display: flex
+  justify-content: center
+  align-items: center
+  img
+    max-width: 300px
+
+.column-info
+  padding-top: 2em
+
+@media screen and (min-width: 48em)
+  .graphics-card-container
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    border: 1px solid gold
+    padding: 20px
+
+  .column-img, .column-info
+    flex: 0 1 calc(50% - .5em)
+  .column-img
+    display: flex
+    justify-content: center
+    align-items: center
+    img
+      max-width: 400px
+  .column-info
+    padding-left: 2em
+
+@media screen and (min-width: 60em)
+  .graphics-card-container
+    margin-top: inherit
+    border: 1px solid gold
+
+  .column-img, .column-info
+    flex: 0 1 calc(50% - 1em)
+  .column-img
+    display: flex
+    justify-content: center
+    align-items: center
+    img
+      max-width: 500px
+  .column-info
+    padding-left: 2em
+
+.name
+  font-size: 25px
+
+.price
+  font-size: 40px
+  color: gold
+  text-align: left
+  vertical-align: middle
+
+.pvp
+  font-size: 15px
+
+.label
+  font-size: 20px
+  line-height: 1.5em
+
+.info
+  font-size: 25px
+  font-weight: lighter
+  color: gold

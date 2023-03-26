@@ -1,0 +1,41 @@
+
+.container
+  padding: 0 10px
+
+
+.spinner-container
+  width: 50px
+  height: 50px
+  display: flex
+  justify-content: center
+  align-items: center
+
+@media screen and (min-width: 40em)
+  .graphics-card-catalog
+    display: flex
+    flex-wrap: wrap
+    justify-content: center
+    gap: 1em
+    height: 580px
+    width: 100%
+    overflow-y: auto
+
+  .graphics-card-card
+    flex: 0 1 calc(50% - .5em)
+    margin-bottom: 1em
+
+@media screen and (min-width: 60em)
+  .graphics-card-catalog
+    margin-top: inherit
+
+  .graphics-card-card
+    flex: 0 1 calc(25% - 1em)
+    margin-bottom: 2em
+
+.centered
+    margin: 0 auto
+    padding: 0 1em
+
+@media screen and (min-width: 52em)
+  .centered
+    max-width: 52em

@@ -1,0 +1,7 @@
+<mat-card class="card" [routerLink]="['/graphics-cards', graphicsCard.id]" data-cy="graphics-card">
+  <img mat-card-image [src]="graphicsCard.imageURL" [alt]="graphicsCard.name">
+  <mat-card-content class="content">
+    <h2 class="name">{{ graphicsCard.name }}</h2>
+    <h2 class="price"><small class="pvp">PVP</small> {{ graphicsCard.price }}</h2>
+  </mat-card-content>
+</mat-card>

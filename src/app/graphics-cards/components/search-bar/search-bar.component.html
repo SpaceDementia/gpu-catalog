@@ -1,0 +1,7 @@
+<div class="search-bar-container">
+  <mat-form-field appearance="outline" class="search-bar custom-mat-form-field" data-cy=search-bar>
+    <mat-label>Busca por nombre o marca</mat-label>
+    <input matInput [(ngModel)]="searchTerm" (input)="onSearch()" />
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+</div>

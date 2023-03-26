@@ -1,0 +1,30 @@
+<mat-grid-list cols="2" rowHeight="2:2" *ngIf="!graphicsCard; else divGraphicsCard">
+  <mat-grid-tile>
+    <mat-spinner></mat-spinner>
+  </mat-grid-tile>
+</mat-grid-list>
+
+<ng-template #divGraphicsCard>
+  <div class="container" data-cy=graphics-card-details>
+    <button mat-icon-button color="warn" (click)="goBack()" data-cy=go-back>
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <div class="graphics-card-container">
+      <div class="column-img">
+        <img mat-card-image [src]="graphicsCard.imageURL" [alt]="graphicsCard.name" data-cy="graphics-card-image">
+      </div>
+      <div class="column-info">
+        <h1 class="name" data-cy="graphics-card-name">{{ graphicsCard.name }}</h1>
+        <mat-divider></mat-divider>
+        <br>
+        <h2 class="price" data-cy="graphics-card-price">{{ graphicsCard.price }}<span class="pvp"> PVP</span></h2>
+        <h2 class="label" data-cy="graphics-card-manufacturer">Brand:<span class="info"> {{ graphicsCard.manufacturer }}</span></h2>
+        <h2 class="label" data-cy="graphics-card-memory">Memory:<span class="info"> {{ graphicsCard.memory }}</span></h2>
+        <h2 class="label" data-cy="graphics-card-core-clock">Coreclock:<span class="info"> {{ graphicsCard.coreClock }}</span></h2>
+        <h2 class="label" data-cy="graphics-card-boost-clock">Boostclock:<span class="info"> {{ graphicsCard.boostClock }}</span></h2>
+        <h2 *ngIf="graphicsCard.streamProcessors" class="label" data-cy="graphics-card-stream-processors">StreamProcessors:<span class="info"> {{ graphicsCard.streamProcessors }}</span></h2>
+        <h2 *ngIf="graphicsCard.cudaCores" class="label" data-cy="graphics-card-cuda-cores">CudaCores:<span class="info"> {{ graphicsCard.cudaCores }}</span></h2>
+      </div>
+    </div>
+</div>
+</ng-template>
