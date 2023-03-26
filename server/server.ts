@@ -397,6 +397,22 @@ app.get('/graphics-cards', (req, res) => {
   res.json(paginatedGraphicsCards);
 });
 
+// Endpoint for the GraphicsCards/id 
+app.get('/graphics-cards/:id', (req, res) => {
+  const id = req.params.id;
+
+  let graphicsCard;
+
+  if (id && typeof id === 'string') {
+    graphicsCard = graphicsCards.find((card) => card.id.toLowerCase() === id.toLowerCase());
+  }
+
+  if (typeof id !== 'string') {
+    return res.status(400).json({ error: 'ID must be a string' });
+  }
+  res.json(graphicsCard);
+});
+
 // Run server on port 3000
 app.listen(PORT, () => {
   console.log(`--> Express server listening on port ${PORT}`);

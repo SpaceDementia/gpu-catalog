@@ -26,7 +26,7 @@ export class GraphicsCardDetailComponent implements OnInit {
       .pipe(
         // We use object destructuring to get the id emitted by params
         switchMap(({ id }) => this.graphicsCardService.getGraphicsCardById(id))
-      ).subscribe((gpu: GraphicsCard | undefined) => this.graphicsCard = gpu as GraphicsCard);
+      ).subscribe((gpu: GraphicsCard) => this.graphicsCard = gpu as GraphicsCard);
   }
 
   goBack() {

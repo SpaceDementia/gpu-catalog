@@ -7,7 +7,7 @@ describe('Graphics Card Details', () => {
 
   it('displays the details of a selected Graphics Card', () => {
     // Get the first Graphics Card from the list and click on it
-    cy.get('[data-cy=graphics-card]').first().click();
+    cy.get('[data-cy=graphics-card-card]').first().click();
 
     // Wait for the XHR request to the details endpoint to finish
     cy.intercept('GET', '/graphics-cards/*').as('getGraphicsCardDetails');

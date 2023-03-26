@@ -43,7 +43,7 @@ npm run build:server
 npm run start:server
 ```
 
-Open your web browser and navigate to http://localhost:3000 to view the application.
+Open your web browser and navigate to http://localhost:3000/graphics-cards?offset=0&limit=8 (`offset` and `limit` are queryParams) to view a JSON file with the first 8 Graphics Cards served by the ExpressJS server.
 
 ### 5. Build the Angular front-end
 
@@ -59,7 +59,9 @@ npm run build
 npm start
 ```
 
-Navigate to `http://localhost:4200/`, the Angular app will consume the first 8 Graphics Cards served by the ExpressJS server on port 3000. With the infinite scroll, the next 8 Graphics Cards will be loaded until all the Graphics Cards have been consumed.
+Navigate to http://localhost:4200/, Angular routing will take you to http://localhost:4200/graphics-cards. 
+The Angular app will consume the first 8 Graphics Cards served by the ExpressJS server on port 3000. With the infinite scroll, the next 8 Graphics Cards will be loaded until all the Graphics Cards have been consumed.
+To check if the spinner is displayed while the API requests are ongoing, press F12, go to Network and select `slow 3G`, go to http://localhost:4200/graphics-cards and scroll down. After checked select `No throttling` again.
 
 ## Running end-to-end tests with Cypress
 

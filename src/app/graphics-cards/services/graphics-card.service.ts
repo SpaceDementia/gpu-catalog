@@ -25,11 +25,7 @@ export class GraphicsCardService {
   }
 
   // Http request to get the Graphics Card with this id from the API
-  getGraphicsCardById(id: string): Observable<GraphicsCard | undefined> {
-    // We filter the data stream that emits the JSON and return the GraphicsCard with the specified id
-    return this.http.get<GraphicsCard[]>(`${this.apiURL}/graphics-cards`)
-      .pipe(
-        map((graphicsCards: GraphicsCard[]) => graphicsCards?.find((graphicsCard: GraphicsCard) => graphicsCard.id === id))
-      );
+  getGraphicsCardById(id: string): Observable<GraphicsCard> {
+    return this.http.get<GraphicsCard>(`${this.apiURL}/graphics-cards/${id}`);//, { params })
   }
 }
