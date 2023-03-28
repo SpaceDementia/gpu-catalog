@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GraphicsCard } from '../../interfaces/graphics-card.interface';
 import { GraphicsCardService } from '../../services/graphics-card.service';
-import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
 
 @Component({
@@ -17,7 +16,7 @@ export class GraphicsCardDetailComponent implements OnInit {
   constructor(
     private graphicsCardService: GraphicsCardService,
     private activatedRoute: ActivatedRoute,
-    private location: Location){}
+    private router: Router){}
 
   ngOnInit() {
     // We get the params from the current URL, transform these params into a GraphicsCard instance
@@ -30,6 +29,6 @@ export class GraphicsCardDetailComponent implements OnInit {
   }
 
   goBack() {
-    this.location.back();
+    this.router.navigate(['/graphics-cards'], { queryParams: { offset: 0, limit: 8 } });
   }
 }

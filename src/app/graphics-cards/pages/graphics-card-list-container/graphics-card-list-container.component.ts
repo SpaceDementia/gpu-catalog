@@ -31,6 +31,8 @@ export class GraphicsCardListContainerComponent implements OnInit {
   }
 
   ngOnInit(): void  {
+    this.offset = 0;
+
     // Subscribe to changes in the queryParams and make the request according to the current offset, limit and searchTerm values
     // Each time one of these values changes, the loadGraphicsCars() method is called automatically due to this subscription
     this.activatedRoute.queryParams.subscribe(params => {
