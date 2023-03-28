@@ -9,8 +9,9 @@ WORKDIR /usr/src/app
 # Copy the package.json, package-lock.json files to the container's working directory
 COPY package*.json ./
 
-# Increase the timeout to 120 seconds before a timeout error occurs
+# Increase the timeout to 2 minutes before a timeout error occurs
 RUN npm config set fetch-retry-maxtimeout 120000
+
 # Install the dependencies from the package-lock.json file
 RUN npm ci
 
@@ -52,6 +53,9 @@ RUN npm run build:server
 
 # Use a base Nginx image to serve the app
 FROM nginx:1.21-alpine
+
+# Install Node.js
+RUN apk add --update nodejs
 
 # Copy the Nginx configuration
 COPY nginx.conf /etc/nginx/nginx.conf
