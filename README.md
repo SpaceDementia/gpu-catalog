@@ -14,6 +14,7 @@ This is a simple Graphics Card Catalog web application that allows users to brow
 - [Angular CLI](https://angular.io/cli) (version 15.x or higher)
 - [Node.js](https://nodejs.org/en) (version 18.x or higher)
 - [npm](https://www.npmjs.com/) (version 9.x or higher)
+- [ExpressJS](https://www.npmjs.com/package/express) (version 4.x or higher)
 
 ## Installation
 
@@ -88,12 +89,19 @@ This command will run ESLint on all files in the app and report any style and sy
 ```
 eslint "src/**/*.{js,ts}" "server/**/*.{js,ts}"
 ```
+Prettier has been used as a Code Formatter.
 
 ## Building and running the app in a Docker container
 
 ```
 docker build -t gpu-catalog .
 ```
+In case you need a detailed log with the output:
+
+```
+docker build -t gpu-catalog . > build.log 2>$1
+```
+The Dockerfile builds a Docker image containing both the Angular app and the Express server, and use Nginx to serve the application.
 
 ```
 docker run -d -p 80:80 gpu-catalog
