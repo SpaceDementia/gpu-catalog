@@ -32,12 +32,18 @@ COPY package*.json ./
 
 # Install production dependencies
 RUN npm ci --only=production
-# Install development dependencies (ignoring errors)
-# To solve the Cypress installation error
-RUN npm ci --only=development || true
+# Install development dependencies excluding Cypress
+RUN npm ci --only=dev && npm uninstall cypress
 
+# Install TypeScript globally
+RUN npm install -g typescript
+
+# Copy the tsconfig.json
+COPY tsconfig.json tsconfig.json
 # Copy the Express server local source code to the server folder in the container's working directory (/usr/src/app/server)
+# and the tsconfig.server.json
 COPY server server
+COPY tsconfig.server.json tsconfig.server.json
 
 # Build the Express server
 RUN npm run build:server
@@ -52,14 +58,14 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 # Copy the Angular app files from the build stage
 # These files are in the folder dist/gpu-catalog as configured in the outputPath in the angular.json
-COPY --from=build /app/dist/gpu-catalog /usr/share/nginx/html
+COPY --from=build /usr/src/app/dist/gpu-catalog /usr/share/nginx/html
 
 # Copy the Express server files from the build stage
 # These files are in the server folder, they were copied there in Stage 2
-COPY --from=server-build /usr/src/app/server /app/server
+COPY --from=server-build /usr/src/app/server /usr/src/app/server
 
 # Expose the port 80 for Nginx
 EXPOSE 80
 
 # Starts Nginx and the Express server
-CMD ["sh", "-c", "nginx && node /app/server/server.js"]
+CMD ["sh", "-c", "nginx && node /usr/src/app/server/server.js"]

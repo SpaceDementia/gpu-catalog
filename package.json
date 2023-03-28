@@ -7,7 +7,7 @@
     "start": "ng serve --host=127.0.0.1",
     "lint": "eslint .",
     "build": "ng build",
-    "build:server": "tsc -p tsconfig.server.json",
+    "build:server": "npx tsc -p tsconfig.server.json",
     "start:server": "node dist/out-tsc/server/server.js",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
