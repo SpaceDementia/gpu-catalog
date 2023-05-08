@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { GraphicsCard } from '../../interfaces/graphics-card.interface';
-import { GraphicsCardService } from '../../services/graphics-card.service';
+import { Store } from '@ngrx/store';
+import { GraphicsCardsApiActions } from 'src/app/state/actions/graphics-cards.actions';
 import { ActivatedRoute, Router } from '@angular/router';
-import { switchMap } from 'rxjs';
+import { Observable } from 'rxjs';
+import { selectGraphicsCardDetailLoading, selectListState, selectSelectedGraphicsCard } from 'src/app/state/selectors/graphics-cards.selectors';
+import { take } from 'rxjs/operators';
+import { NavigationService } from '../../services/navigation.service';
 
 @Component({
   selector: 'graphics-card-detail',
@@ -11,24 +15,32 @@ import { switchMap } from 'rxjs';
 })
 export class GraphicsCardDetailComponent implements OnInit {
 
-  graphicsCard: GraphicsCard = {} as GraphicsCard;
+  graphicsCard$: Observable<GraphicsCard | null>;
+  loadingDetails$: Observable<boolean>;
 
   constructor(
-    private graphicsCardService: GraphicsCardService,
+    private store: Store,
     private activatedRoute: ActivatedRoute,
-    private router: Router){}
+    private router: Router,
+    private navigationService: NavigationService){
+      this.graphicsCard$ = this.store.select(selectSelectedGraphicsCard);
+      this.loadingDetails$ = this.store.select(selectGraphicsCardDetailLoading);
+    }
 
   ngOnInit() {
-    // We get the params from the current URL, transform these params into a GraphicsCard instance
-    // and then subscribe to this new observable to get the GraphicsCard with the id that is in the current URL params
-    this.activatedRoute.params
-      .pipe(
-        // We use object destructuring to get the id emitted by params
-        switchMap(({ id }) => this.graphicsCardService.getGraphicsCardById(id))
-      ).subscribe((gpu: GraphicsCard) => this.graphicsCard = gpu as GraphicsCard);
+    // We get the id param from the current URL
+    const id = this.activatedRoute.snapshot.params['id'];
+    if(id) {
+      this.store.dispatch(GraphicsCardsApiActions.loadSelectedGraphicsCard({ id }));
+    }
   }
 
   goBack() {
-    this.router.navigate(['/graphics-cards'], { queryParams: { offset: 0, limit: 8 } });
+    this.store.select(selectListState).pipe(take(1)).subscribe(listState => {
+      const { offset, limit, searchTerm } = listState;
+      const queryParams = searchTerm ? { offset, limit, searchTerm } : { offset, limit };
+
+      this.router.navigate(['/graphics-cards'], { queryParams });
+    });
   }
 }

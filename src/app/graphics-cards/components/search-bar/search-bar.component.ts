@@ -1,5 +1,6 @@
 // search-bar.component.ts
-import { Component, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'search-bar',
@@ -8,12 +9,9 @@ import { Component, Output, EventEmitter, ViewEncapsulation } from '@angular/cor
   encapsulation: ViewEncapsulation.None
 })
 export class SearchBarComponent {
+
+  @Input() searchTerm$!: Observable<string | null>;
   @Output() search = new EventEmitter<string>();
 
-  searchTerm = '';
-
-  onSearch() {
-    this.search.emit(this.searchTerm);
-  }
 }
 

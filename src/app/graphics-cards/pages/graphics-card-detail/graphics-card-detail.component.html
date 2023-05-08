@@ -1,11 +1,11 @@
-<mat-grid-list cols="2" rowHeight="2:2" *ngIf="!graphicsCard; else divGraphicsCard">
+<mat-grid-list cols="2" rowHeight="2:2" *ngIf="loadingDetails$ | async; else divGraphicsCard">
   <mat-grid-tile>
     <mat-spinner></mat-spinner>
   </mat-grid-tile>
 </mat-grid-list>
 
 <ng-template #divGraphicsCard>
-  <div class="container" data-cy="graphics-card-details">
+  <div *ngIf="graphicsCard$ | async as graphicsCard" class="container" data-cy="graphics-card-details">
     <button mat-icon-button color="warn" (click)="goBack()" data-cy=go-back>
       <mat-icon>arrow_back</mat-icon>
     </button>
